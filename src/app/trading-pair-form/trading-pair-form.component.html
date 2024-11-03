@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-title>Create New Trading Pair</mat-card-title>
+    <form [formGroup]="tradingPairForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Trading Pair (e.g., BTC/USDT)</mat-label>
+        <input matInput formControlName="pair" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fixed Amount</mat-label>
+        <input matInput type="number" formControlName="amount" required>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="!tradingPairForm.valid">Add Pair</button>
+    </form>
+  </mat-card>
