@@ -2,15 +2,26 @@
     <mat-card-title>Create New Trading Pair</mat-card-title>
     <form [formGroup]="tradingPairForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Trading Pair (e.g., BTC/USDT)</mat-label>
+        <mat-label>Trading Pair (e.g., BTCUSD)</mat-label>
         <input matInput formControlName="pair" required>
       </mat-form-field>
   
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Fixed Amount</mat-label>
-        <input matInput type="number" formControlName="amount" required>
+        <mat-label>Miner</mat-label>
+        <input matInput formControlName="miner" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Back Test Asset 1 Amount</mat-label>
+        <input matInput type="number" formControlName="asset1" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Back Test Asset 2 Amount</mat-label>
+        <input matInput type="number" formControlName="asset2" required>
       </mat-form-field>
   
-      <button mat-raised-button color="primary" type="submit" [disabled]="!tradingPairForm.valid">Add Pair</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!tradingPairForm.valid || isBackTesting">Add Pair</button>
+      <button style="margin-left: 10px;" mat-raised-button color="accent" (click)="backtest()" [disabled]="!tradingPairForm.valid || isBackTesting">Back Test</button>
     </form>
   </mat-card>
