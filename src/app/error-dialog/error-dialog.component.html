@@ -1,9 +1,9 @@
 <div style="margin: 5px;">
     <h1 mat-dialog-title>{{ data.title ?? 'Error' }}</h1>
     <div mat-dialog-content>
-    <p style="white-space: pre-wrap;">{{ data.message }}</p>
+    <p style="white-space: pre-wrap; overflow: auto;">{{ data.message }}</p>
     </div>
     <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button mat-dialog-close (click)="closeDialog()">Close</button>
     </div>
 </div>

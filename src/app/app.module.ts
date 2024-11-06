@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { TradingPairFormComponent } from './trading-pair-form/trading-pair-form.component';
@@ -30,7 +31,9 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MatCardModule,
     MatButtonModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatRadioModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

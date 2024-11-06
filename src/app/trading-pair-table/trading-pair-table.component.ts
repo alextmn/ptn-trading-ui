@@ -1,21 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TradingPairService } from '../service/trading-pair.service';
 
 @Component({
   selector: 'app-trading-pair-table',
   templateUrl: './trading-pair-table.component.html',
   styleUrls: ['./trading-pair-table.component.css']
 })
-export class TradingPairTableComponent {
-  monitoredPairs = [
-    { pair: 'BTC/USDT', amount: 100 },
-    { pair: 'ETH/USDT', amount: 50 }
-    // Add logic to fetch actual data or update this list as needed
-  ];
+export class TradingPairTableComponent  implements OnInit {
+  
+  monitoredPairs = [];
 
-  displayedColumns: string[] = ['pair', 'amount', 'actions'];
+  constructor(private tradingPairService: TradingPairService) {}
+  displayedColumns: string[] = ['id', 'miner', 'pair', 'last', 'actions'];
 
-  cancelPair(pair: string) {
-    console.log(`Cancel monitoring for: ${pair}`);
-    // Logic to send a cancel request to the backend
+  ngOnInit(): void {
+
+    this.update();
+    this.tradingPairService.observable()
+      .subscribe(_=> this.update())
+  }
+
+  private update() {
+    this.tradingPairService.pairList()
+      .subscribe(a => this.monitoredPairs = a);
+  }
+  cancelPair(id: number) {
+    console.log(`Cancel monitoring for: ${id}`);
+    this.tradingPairService.cancelPair(id)
   }
 }
