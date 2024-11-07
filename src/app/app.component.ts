@@ -32,9 +32,10 @@ export class AppComponent {
 
   async signMessage() {
     try {
-      const signature = await this.metaMaskAuthService.signMessage('Authentication Message');
-      console.log('Signed Message:', signature);
-      await firstValueFrom(this.httpClient.post('api/verify-signature', {signature} ));
+      const signature = await this.metaMaskAuthService.signMessage('Authentication Message') ?? '';
+      await firstValueFrom(this.httpClient.post('api/verify-signature', {}, 
+        { headers:  {'Authorization': signature } } ));
+        this.metaMaskAuthService.setSignature(signature);
     } catch (e: any) {
       console.error('Connect to MetaMask first.', e);
       this.dialog.open(ErrorDialogComponent, {

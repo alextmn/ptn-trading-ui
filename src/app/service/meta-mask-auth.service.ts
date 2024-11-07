@@ -48,7 +48,6 @@ export class MetaMaskAuthService {
       try {
         const signature = await this.signer.signMessage(message);
         console.log('Signature:', signature);
-        this.walletSignature.next(signature);
         return signature;
       } catch (error) {
         console.error('Error signing message:', error);
@@ -60,7 +59,9 @@ export class MetaMaskAuthService {
     }
   }
 
-
+  setSignature(signature: string) {
+    this.walletSignature.next(signature);
+  }
   signOut() {
     this.walletSignature.next('');
   }

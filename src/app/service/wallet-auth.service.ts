@@ -12,9 +12,10 @@ export class WalletAuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Clone the request and add the WebAUTH header if the token exists
+    const authorization:string | null = req.headers.get('Authorization')
     const authReq = req.clone({
       setHeaders: {
-        Authorization: `${this.metaMaskAuthService.getWalletSignatureValue()}`,
+        Authorization: `${authorization ?? this.metaMaskAuthService.getWalletSignatureValue()}`,
       },
     });
 
