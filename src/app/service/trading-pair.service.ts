@@ -12,13 +12,14 @@ export class TradingPairService {
 
   constructor(private http: HttpClient) {}
 
-  addPair(trade_pair: string, miner: string, asset1: string, asset2: string) {
-    return this.http.post(`${this.baseUrl}/add-pair`, {trade_pair, miner, asset1, asset2})
+  addPair(exchange:string, trade_pair: string, miner: string, asset1: string, asset2: string, 
+    binance_api_key: string,  binance_secret_key: string) {
+    return this.http.post(`${this.baseUrl}/add-pair`,  {exchange, trade_pair, miner, asset1, asset2, binance_api_key,binance_secret_key })
     .subscribe(_ => this.subject.next(''));
   }
 
   backtest(trade_pair: string, miner: string, asset1: string, asset2: string):Observable<any> {
-    return this.http.post(`${this.baseUrl}/back-test`, {trade_pair, miner, asset1, asset2});
+    return this.http.post(`${this.baseUrl}/back-test`, { trade_pair, miner, asset1, asset2 });
   }
 
 

@@ -12,20 +12,30 @@
       </mat-form-field>
 
       <label id="exchangeType">Exchange: </label>
-        <mat-radio-group formControlName="exchangeType" aria-label="Select an Exchange">
+        <mat-radio-group formControlName="exchangeType" aria-label="Select an Exchange" (change)="onSelectionChange($event)">
           <mat-radio-button value="simulated">Simulated</mat-radio-button>
-          <mat-radio-button value="binance" disabled="true">Binance</mat-radio-button>
+          <mat-radio-button value="binance">Binance</mat-radio-button>
           <mat-radio-button value="hyperliquid" disabled="true">Hyperliquid</mat-radio-button>
         </mat-radio-group>
       
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'simulated'">
         <mat-label>Back Test Asset 1 Amount</mat-label>
         <input matInput type="number" formControlName="asset1" required>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'simulated'">
         <mat-label>Back Test Asset 2 Amount</mat-label>
         <input matInput type="number" formControlName="asset2" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'binance'">
+        <mat-label>Binance API KEY</mat-label>
+        <input matInput formControlName="binanceApiKey" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'binance'">
+        <mat-label>Binance Secret KEY</mat-label>
+        <input matInput formControlName="binanceSecretKey" required >
       </mat-form-field>
   
       <button mat-raised-button color="primary" (click)="addPair()" [disabled]="!tradingPairForm.valid || isBackTesting">Add Pair</button>
