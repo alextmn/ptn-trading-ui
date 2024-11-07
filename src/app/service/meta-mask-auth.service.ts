@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MetaMaskAuthService {
+  
   private provider: ethers.BrowserProvider | null = null;
   private signer: ethers.JsonRpcSigner | null = null;
   public userAddress: string | null = null;
 
-  private walletSignature = new Subject<string>();
+  private walletSignature = new BehaviorSubject<string>('');
 
   constructor() {
     this.initializeProvider();
@@ -59,11 +60,16 @@ export class MetaMaskAuthService {
     }
   }
 
+
   signOut() {
     this.walletSignature.next('');
   }
 
   getWalletSignatureObservable() {
     return this.walletSignature.asObservable();
+  }
+
+  getWalletSignatureValue() {
+    return this.walletSignature.getValue();
   }
 }

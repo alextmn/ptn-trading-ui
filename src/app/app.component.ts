@@ -13,9 +13,17 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 export class AppComponent {
   title = 'PTN Trading';
   userAddress: string | null = null;
+  isLoggedIn = false;
+
   constructor(private metaMaskAuthService: MetaMaskAuthService, 
     private httpClient: HttpClient,
-    private dialog: MatDialog) {}
+    private dialog: MatDialog) {
+      this.metaMaskAuthService
+      .getWalletSignatureObservable()
+      .subscribe(a=> {
+        this.isLoggedIn = a ? true: false; 
+      })
+    }
   
   async connectWallet() {
     await this.metaMaskAuthService.connectWallet();

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { TradingPairFormComponent } from './trading-pair-form/trading-pair-form.component';
 import { TradingPairTableComponent } from './trading-pair-table/trading-pair-table.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { WalletAuthInterceptorService } from './service/wallet-auth.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,13 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MatRadioModule
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WalletAuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

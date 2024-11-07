@@ -32,6 +32,10 @@ export class TradingPairService {
     return this.http.get(`${this.baseUrl}/pair-list`);
   }
 
+  trace(id: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/trace`, {id});
+  }
+
   observable(): Observable<any> {
     return this.subject.asObservable();
   }
