@@ -29,6 +29,8 @@ export class TradingPairFormComponent {
       exchangeType: ['simulated', [Validators.required] ],
       binanceApiKey:['', [Validators.required]],
       binanceSecretKey:['', [Validators.required]],
+      hlSecretKey:['', [Validators.required]],
+      
 
       asset1: ['0.0146', [Validators.required, Validators.min(0.00001)]],
       asset2: ['1000', [Validators.required, Validators.min(0.00001)]]
@@ -44,7 +46,9 @@ export class TradingPairFormComponent {
       const asset2 = this.tradingPairForm.value.asset2;
       const binanceApiKey = this.tradingPairForm.value.binanceApiKey;
       const binanceSecretKey = this.tradingPairForm.value.binanceSecretKey;
-      this.tradingPairService.addPair(this.selectedOption, trade_pair, miner, asset1, asset2, binanceApiKey, binanceSecretKey)
+      const hlSecretKey = this.tradingPairForm.value.hlSecretKey;
+      this.tradingPairService.addPair(this.selectedOption, trade_pair, miner, asset1, 
+        asset2, binanceApiKey, binanceSecretKey, hlSecretKey)
       console.log('New Pair Added:', trade_pair);
     }
   }
@@ -85,6 +89,8 @@ export class TradingPairFormComponent {
     this.tradingPairForm.get('asset2')?.disable();
     this.tradingPairForm.get('binanceApiKey')?.disable();
     this.tradingPairForm.get('binanceSecretKey')?.disable();
+    this.tradingPairForm.get('hlSecretKey')?.disable();
+
 
     switch(value) {
       case "simulated":
@@ -95,6 +101,10 @@ export class TradingPairFormComponent {
         this.tradingPairForm.get('binanceApiKey')?.enable();
         this.tradingPairForm.get('binanceSecretKey')?.enable();
       break;
+      case "hl":
+        this.tradingPairForm.get('hlSecretKey')?.enable();
+      break;
+      
     }
   }
 }

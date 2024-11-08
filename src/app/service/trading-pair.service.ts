@@ -13,8 +13,9 @@ export class TradingPairService {
   constructor(private http: HttpClient) {}
 
   addPair(exchange:string, trade_pair: string, miner: string, asset1: string, asset2: string, 
-    binance_api_key: string,  binance_secret_key: string) {
-    return this.http.post(`${this.baseUrl}/add-pair`,  {exchange, trade_pair, miner, asset1, asset2, binance_api_key,binance_secret_key })
+    binance_api_key: string,  binance_secret_key: string, hlSecretKey: string) {
+    return this.http.post(`${this.baseUrl}/add-pair`,  {exchange, trade_pair, miner, asset1, asset2, 
+      binance_api_key,binance_secret_key, hlSecretKey })
     .subscribe(_ => this.subject.next(''));
   }
 

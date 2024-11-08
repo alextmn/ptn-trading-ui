@@ -15,7 +15,7 @@
         <mat-radio-group formControlName="exchangeType" aria-label="Select an Exchange" (change)="onSelectionChange($event)">
           <mat-radio-button value="simulated">Simulated</mat-radio-button>
           <mat-radio-button value="binance">Binance</mat-radio-button>
-          <mat-radio-button value="hyperliquid" disabled="true">Hyperliquid</mat-radio-button>
+          <mat-radio-button value="hl">Hyperliquid</mat-radio-button>
         </mat-radio-group>
       
       <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'simulated'">
@@ -36,6 +36,11 @@
       <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'binance'">
         <mat-label>Binance Secret KEY</mat-label>
         <input matInput formControlName="binanceSecretKey" required >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width" *ngIf="selectedOption == 'hl'">
+        <mat-label>Hyperliquid Secret KEY</mat-label>
+        <input matInput formControlName="hlSecretKey" required>
       </mat-form-field>
   
       <button mat-raised-button color="primary" (click)="addPair()" [disabled]="!tradingPairForm.valid || isBackTesting">Add Pair</button>
