@@ -6,7 +6,7 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 @Component({
   selector: 'app-trading-pair-table',
   templateUrl: './trading-pair-table.component.html',
-  styleUrls: ['./trading-pair-table.component.css']
+  styleUrls: ['./trading-pair-table.component.scss']
 })
 export class TradingPairTableComponent  implements OnInit {
 

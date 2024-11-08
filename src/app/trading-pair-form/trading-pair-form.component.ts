@@ -11,7 +11,7 @@ import { MatRadioChange } from '@angular/material/radio';
 @Component({
   selector: 'app-trading-pair-form',
   templateUrl: './trading-pair-form.component.html',
-  styleUrls: ['./trading-pair-form.component.css']
+  styleUrls: ['./trading-pair-form.component.scss']
 })
 export class TradingPairFormComponent {
 
